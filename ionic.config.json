@@ -1,0 +1,7 @@
+{
+  "name": "GabrielTarefa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
