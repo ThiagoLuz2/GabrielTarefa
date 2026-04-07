@@ -5,20 +5,21 @@
                     :color="props.tarefa.concluida ? 'success' : 'warning'"
                     @click="emit('concluir', props.tarefa.id)"/> -->
         <ion-card-header>
-        
-                {{ props.eventos.concluida ? '✅' : '⭕' }}
-                
-                    {{ props.eventos.texto }}
-            
+            {{ props.eventos.favorito ? '⭐' : '☆' }}
+            {{ props.eventos.concluida ? '✅' : '⭕' }}
+            {{ props.eventos.texto }}
         </ion-card-header>
         <ion-card-content>
+            <ion-button color="warning" @click="emit('favoritar', props.eventos.id)" size="small">
+                {{ props.eventos.favorito ? 'Desfavoritar' : 'Favoritar' }}
+            </ion-button>
             <ion-button @click="emit('concluir', props.eventos.id)" size="small">
                 ✔
             </ion-button>
             <ion-button color="danger" @click="emit('remover', props.eventos.id)">
                 <ion-icon :icon="trashOutline" />
             </ion-button>
-            <ion-button color="primary" @click="$router.push('/Detalhes')">
+            <ion-button color="primary" @click="$router.push(`/Detalhes/${props.eventos.id}`)">
                 Detalhes
             </ion-button>
 
@@ -38,10 +39,12 @@ interface Eventos {
     id: number;
     texto: string;
     concluida: boolean;
+    favorito: boolean;
 }
 const props = defineProps<{ eventos: Eventos }>()
 const emit = defineEmits<{
     remover: [id: number]
     concluir: [id: number]
+    favoritar: [id: number]
 }>()
 </script>

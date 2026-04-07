@@ -14,8 +14,13 @@
       </ion-header>
 
       <div id="container">
-        <ion-button @click="router.push('/Eventos')">vamo</ion-button>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <ion-button @click="router.push('/Eventos')" style="margin-top: 12px;">Eventos</ion-button>
+        <ion-button color="secondary" @click="router.push('/Favorito')" style="margin-top: 12px;">
+          Favoritos
+        </ion-button>
+        <ion-button color="tertiary" @click="router.push('/Perfil')" style="margin-top: 12px;">
+          Perfil / Login
+        </ion-button>
       </div>
     </ion-content>
   </ion-page>

@@ -14,11 +14,14 @@
           <ion-button @click="adicionarNova" color="success" fill="solid" expand="block" slot="end">
             <ion-icon :icon="addOutline"></ion-icon> Adicionar
           </ion-button>
+          <ion-input v-model="Novadescricao" placeholder="Digite uma descrição..."
+            @keyup.enter="adicionarDescricao"></ion-input>
+
         </div>
 
         <template v-if="filtradas.length > 0">
-          <CardEventos v-for="tarefa in eventos" :key="tarefa.id" :eventos="tarefa" @remover="remover"
-            @concluir="concluir"></CardEventos>
+          <CardEventos v-for="tarefa in filtradas" :key="tarefa.id" :eventos="tarefa" @remover="remover"
+            @concluir="concluir" @favoritar="toggleFavorito"></CardEventos>
 
         </template>
         <div class="vazio" v-else>
@@ -34,7 +37,7 @@
 
     </ion-header>
 
-    <IonButton @click="router.push('/Home')">voltar</IonButton>
+    <IonButton @click="router.push('/Home')">voltar para home</IonButton>
   </ion-page>
 
 
@@ -49,11 +52,20 @@ import { addOutline } from 'ionicons/icons';
 import CardEventos from '../components/CardEventos.vue';
 import { useTarefas } from '../composable/eventos';
 
-const {eventos, filtradas, adicionar, remover, concluir } = useTarefas()
+const { filtradas, adicionarEvento, remover, concluir, toggleFavorito } = useTarefas()
 const NovoEvento = ref('')
+const Novadescricao = ref('')
 function adicionarNova() {
-  adicionar(NovoEvento.value)
+  adicionarEvento(NovoEvento.value, Novadescricao.value)
+  Novadescricao.value = ''
   NovoEvento.value = ''
+}
+function adicionarDescricao(){
+  const id = adicionarEvento(Novadescricao.value, Novadescricao.value)
+  if (id !== -1) {
+    router.push(`/Detalhes/${id}`)
+  }
+  Novadescricao.value = ''
 }
 
 

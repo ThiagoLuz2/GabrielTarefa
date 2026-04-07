@@ -17,9 +17,19 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/EventosPage.vue')
   },
   {
-    path: '/Detalhes',
+    path: '/Detalhes/:id',
     name: 'Detalhes',
     component: () => import('../views/DetalhesPage.vue')
+  },
+  {
+    path: '/Favorito',
+    name: 'Favorito',
+    component: () => import('../views/FavoritoPage.vue')
+  },
+  {
+    path: '/Perfil',
+    name: 'Perfil',
+    component: () => import('../views/PerfilPage.vue')
   }
 ]
 
